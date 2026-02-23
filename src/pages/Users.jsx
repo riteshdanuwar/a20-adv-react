@@ -8,6 +8,7 @@ export const BASEURL = "https://jsonplaceholder.typicode.com";
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [showForm, setShowForm] = useState(false);
+  const [editId,setEditId] = useState(null);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -26,7 +27,7 @@ const Users = () => {
 
   return (
     <div>
-      {showForm && <UserForm />}
+      {showForm && <UserForm editId={editId} users={users}/>}
       {users.map((user) => {
         return (
           <UserCard
@@ -34,6 +35,7 @@ const Users = () => {
             userDetail={user}
             setUsers={setUsers}
             setShowForm={setShowForm}
+            setEditId={setEditId}
           />
         );
       })}
