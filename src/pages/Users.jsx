@@ -2,10 +2,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import UserCard from "../components/UserCard";
+import UserForm from "../components/UserForm";
 
 export const BASEURL = "https://jsonplaceholder.typicode.com";
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+
   useEffect(() => {
     const getUsers = async () => {
       try {
@@ -23,8 +26,16 @@ const Users = () => {
 
   return (
     <div>
+      {showForm && <UserForm />}
       {users.map((user) => {
-        return <UserCard key={user.id} userDetail={user} setUsers={setUsers} />;
+        return (
+          <UserCard
+            key={user.id}
+            userDetail={user}
+            setUsers={setUsers}
+            setShowForm={setShowForm}
+          />
+        );
       })}
     </div>
   );
